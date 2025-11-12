@@ -81,4 +81,3 @@ Mask-Detection-System/
 ├── README.md # Project documentation
 ├── requirements.txt # Required Python libraries
 └── report_draft.docx # Phase 2 draft report
-```bash
