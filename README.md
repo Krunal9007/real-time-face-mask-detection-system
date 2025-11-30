@@ -16,11 +16,11 @@ This project was completed as part of the:
 ---
 
 ## Objectives (Phase 3 Status)
-- ✔ Build a CNN model to detect mask vs. no mask  
-- ✔ Achieve reliable real-time detection performance  
-- ✔ Implement using *Python, OpenCV, TensorFlow/Keras*  
-- ✔ Test detection on live webcam feed  
-- ✔ Document all development steps for the IU portfolio  
+- Build a CNN model to detect mask vs. no mask  
+- Achieve reliable real-time detection performance  
+- Implement using *Python, OpenCV, TensorFlow/Keras*  
+- Test detection on live webcam feed  
+- Document all development steps for the IU portfolio  
 
 While no formal accuracy metrics (precision/recall/F1) were calculated, the model performs consistently well during informal testing.
 
