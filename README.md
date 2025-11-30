@@ -1,67 +1,87 @@
 # Real-Time Face Mask Detection System
 
 ## Project Overview
-This project aims to develop a *real-time face mask detection system* that can automatically detect whether individuals are wearing face masks correctly or not.  
-The system uses a combination of *Computer Vision* and *Deep Learning* techniques to identify faces in video frames and classify them as "Mask" or "No Mask".
+This project implements a fully working *real-time face mask detection system* capable of identifying whether individuals are wearing face masks or not.  
+The complete pipeline—dataset preparation, model training, and real-time detection—was successfully developed and tested.
 
-The goal is to create a *lightweight and accurate* detection model that can run in real-time on a standard computer using a webcam or camera feed.
+The system uses a combination of *Computer Vision* and *Deep Learning* techniques to detect faces in live video frames and classify them into two categories:
+- **Mask**
+- **No Mask**
 
-This repository is being developed as part of the *IU International University of Applied Sciences* course:
-> *Project: Computer Science (CSEMCSPCSP01)* – Phase 2 (Development/Reflection Phase)
+The model has been trained and deployed locally, and the real-time detection runs smoothly on a standard computer using a webcam.  
+This project was completed as part of the:
+
+> **Project: Computer Science (CSEMCSPCSP01)** – Phase 3 (Final Submission)
 
 ---
 
-## Objectives
-- Build a deep learning model that can detect whether a person is wearing a mask or not.  
-- Achieve reliable detection speed and accuracy for real-time use.  
-- Implement the model using *Python, **OpenCV, and **TensorFlow/Keras*.  
-- Evaluate performance based on accuracy, precision, recall, and F1-score.  
-- Prepare documentation and report as per IU university portfolio guidelines.
+## Objectives (Phase 3 Status)
+- ✔ Build a CNN model to detect mask vs. no mask  
+- ✔ Achieve reliable real-time detection performance  
+- ✔ Implement using *Python, OpenCV, TensorFlow/Keras*  
+- ✔ Test detection on live webcam feed  
+- ✔ Document all development steps for the IU portfolio  
+
+While no formal accuracy metrics (precision/recall/F1) were calculated, the model performs consistently well during informal testing.
 
 ---
 
 ## Technical Approach
 
-### 1. Data Collection
-- Using the [Face Mask Detection Dataset (Kaggle)](https://www.kaggle.com/datasets/andrewmvd/face-mask-detection).  
-- Dataset includes labeled images for *Mask* and *No Mask* classes.  
-- Data will be preprocessed and augmented to increase model robustness.
+### 1. Dataset
+- Dataset used: **Face Mask Detection Dataset (Kaggle)**
+- Three original classes:
+  - *with_mask*
+  - *without_mask*
+  - *mask_weared_incorrect*  
+- For this project, only “with_mask” and “without_mask” were used to form a binary classification dataset.
+- The dataset is **not included** in this repository due to Kaggle licensing.
 
 ### 2. Preprocessing
-- Resize all images to 128x128 pixels.  
-- Normalize pixel values (0–1 range).  
-- Split dataset: 80% Training, 10% Validation, 10% Testing.  
+- All images were resized to **128×128 pixels**
+- Pixel values were normalized to the 0–1 range
+- Dataset split:
+  - **80% Training**
+  - **20% Validation**  
+- Data augmentation applied (rotation, zoom, and brightness shifts) to reduce overfitting
 
 ### 3. Model Development
-- *Model Type:* Convolutional Neural Network (CNN)  
-- *Frameworks:* TensorFlow, Keras  
-- *Activation Functions:* ReLU for hidden layers, Softmax for output layer  
-- *Loss Function:* Binary Crossentropy  
-- *Optimizer:* Adam  
+- A **Convolutional Neural Network (CNN)** was designed for the binary classification task
+- Implemented using **TensorFlow / Keras**
+- Key components:
+  - Activation functions: **ReLU** (hidden layers), **Sigmoid** (output)
+  - Loss function: **Binary Crossentropy**
+  - Optimizer: **Adam**
+- The model was trained locally on CPU and the final weights were saved in the `/models` directory
 
-### 4. Training
-- Model will be trained on GPU (if available).  
-- Training progress (loss/accuracy) will be tracked and visualized using Matplotlib.  
-- Model weights will be saved in the models/ folder.  
-
-### 5. Real-Time Detection
-- Integration with *OpenCV* for real-time video feed processing.  
-- Use Haar cascades or DNN-based face detectors to locate faces in each frame.  
-- For each detected face, classify mask status using the trained CNN model.
+### 4. Real-Time Detection
+- Implemented using **OpenCV**
+- Haar cascade classifier used for face detection
+- Each detected face region is:
+  1. Extracted  
+  2. Preprocessed  
+  3. Passed to the trained CNN model  
+- Output label (“Mask” / “No Mask”) is displayed on the webcam feed in real time
 
 ---
 
 ## Testing & Evaluation
-Testing will be conducted on:
-- *Static images* (for model accuracy evaluation)
-- *Real-time webcam feed* (for performance in dynamic environments)
 
-Metrics to be used:
-- Accuracy  
-- Precision  
-- Recall  
-- F1-Score  
-- Frame processing rate (FPS)
+### Informal Testing
+Since the project focuses on practical implementation rather than benchmarking, evaluation was performed informally through real-time trials.
+
+Tests were done under different:
+- Lighting conditions  
+- Angles and distances  
+- Mask types  
+- Backgrounds  
+
+### Observations
+- The face detection reacts quickly and updates smoothly  
+- The mask classifier provides stable predictions  
+- Performance is noticeably dependent on lighting  
+- Haar cascade may miss faces at extreme angles  
+- Despite these limitations, the system functions reliably for typical webcam usage
 
 ---
 
@@ -69,15 +89,18 @@ Metrics to be used:
 ```bash
 Mask-Detection-System/
 │
-├── data/ # Datasets (or dataset links)
-├── notebooks/ # Jupyter notebooks for experiments
-├── src/ # Python source code
-│ ├── preprocess.py
-│ ├── train_model.py
-│ ├── detect_mask.py
-│ └── utils.py
-├── models/ # Trained models (.h5 files)
-├── results/ # Plots, metrics, or sample outputs
-├── README.md # Project documentation
-├── requirements.txt # Required Python libraries
-└── report_draft.docx # Phase 2 draft report
+├── data/                   # Not included (Kaggle dataset)
+├── notebooks/              # Optional experiments (if needed)
+├── src/
+│   ├── detect_mask.py      # Real-time detection script
+│   ├── train_model.py      # Model training script
+│   ├── utils.py            # Helper functions
+│   └── preprocess.py       # Image processing logic
+│
+├── models/
+│   └── mask_detector.h5    # Trained model
+│
+├── results/                # Output visuals (empty if not used)
+├── README.md               # Phase 3 documentation
+├── requirements.txt        # Python dependencies
+└── report_final.docx       # Final Phase 3 report
