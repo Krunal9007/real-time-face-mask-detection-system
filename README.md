@@ -90,7 +90,6 @@ Tests were done under different:
 Mask-Detection-System/
 │
 ├── data/                   # Not included (Kaggle dataset)
-├── notebooks/              # Optional experiments (if needed)
 ├── src/
 │   ├── detect_mask.py      # Real-time detection script
 │   ├── train_model.py      # Model training script
